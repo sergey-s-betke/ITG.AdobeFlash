@@ -53,7 +53,7 @@
 			Level="1"
 			AllowAdvertise="system"
 			InstallDefault="local"
-			TypicalDefault="install"
+			TypicalDefault="advertise"
 		>
 			<ComponentRef Id="Flash.ocx" />
 			<ComponentRef Id="FlashUtil_ActiveX.exe" />
