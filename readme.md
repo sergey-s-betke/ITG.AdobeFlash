@@ -19,11 +19,11 @@ P.S.Данное решение не предназначено для Windows 8
 Развёртывание пакета через GPO
 ------------------------------
 
-Подготовленная административная точка установки расположена в подкаталоге [itgAdobeFlash\bin\Release\x64](../../tree/master/itgAdobeFlash/bin/Release/x64).
+Подготовленная административная точка установки расположена в подкаталоге [itgAdobeFlash\bin\Release\x86](../../tree/master/itgAdobeFlash/bin/Release/x86).
 Дополнительной подготовки файла `itgAdobeFlash.msi` через `msiexec -a itgAdobeFlash.msi` не требуется.
 Скачайте целиком папку указанную выше папку, разместите на сетевом ресурсе, и - разверните через GPO.
 
-P.S. Версия для x86 - [itgAdobeFlash\bin\Release\x86](../../tree/master/itgAdobeFlash/bin/Release/x86).
+P.S. Версия для x64 - [itgAdobeFlash\bin\Release\x64](../../tree/master/itgAdobeFlash/bin/Release/x64).
 
 Сборка .msi пакета
 ------------------
