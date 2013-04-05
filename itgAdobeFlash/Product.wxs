@@ -53,17 +53,17 @@
 			Level="1"
 			AllowAdvertise="system"
 			InstallDefault="local"
-			TypicalDefault="advertise"
+			TypicalDefault="install"
 		>
 			<ComponentRef Id="Flash.ocx" />
 		</Feature>
 		<Feature
 			Id="FlashUtil"
 			Title="Flash player properties page"
-			Level="200"
+			Level="90"
 			AllowAdvertise="system"
 			InstallDefault="local"
-			TypicalDefault="advertise"
+			TypicalDefault="install"
 		>
 			<ComponentRef Id="FlashUtil_ActiveX.exe" />
 			<ComponentRef Id="FlashUtil_ActiveX.dll" />
