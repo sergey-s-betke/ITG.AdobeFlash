@@ -12,7 +12,7 @@
 		<?define SystemFolderId="SystemFolder" ?>
 		<?define SystemFolder="System32" ?>
 		<?define Win64="no" ?>
-	<?elseif $(sys.PLATFORM) = "x64" ?> 
+	<?elseif $(sys.BUILDARCH) = "x64" ?> 
 		<?define PlatformPostfix="64" ?>
 		<?define SystemFolderId="System64Folder" ?>
 		<?define SystemFolder="System64" ?>
@@ -38,7 +38,7 @@
 			Compressed="no"
 			Description="Package for distibution flash player activeX"
 			Manufacturer="IT-Service"
-			SummaryCodepage="1252" 
+			SummaryCodepage="1252"
 		/>
 
 		<MajorUpgrade
@@ -56,15 +56,6 @@
 			TypicalDefault="install"
 		>
 			<ComponentRef Id="Flash.ocx" />
-		</Feature>
-		<Feature
-			Id="FlashUtil"
-			Title="Flash player properties page"
-			Level="90"
-			AllowAdvertise="system"
-			InstallDefault="local"
-			TypicalDefault="install"
-		>
 			<ComponentRef Id="FlashUtil_ActiveX.exe" />
 			<ComponentRef Id="FlashUtil_ActiveX.dll" />
 		</Feature>
@@ -78,33 +69,56 @@
 					<Component
 						Id="Flash.ocx"
 						Location="local"
-						Win64="$(var.Win64)"
+						Win64="$(var.Win64)" 
 					>
-						<File Name="Flash$(var.PlatformPostfix)_11_6_602_180.ocx" Vital="yes" SelfRegCost="1" KeyPath="yes"/>
+						<File Name="Flash.ocx" Vital="yes" KeyPath="yes">
+							<TypeLib
+								Id="{57A0E746-3863-4D20-A811-950C84F1DB9B}"
+								Advertise="no"
+								MajorVersion="1" MinorVersion="1"
+								Language="1033"
+								Description="FlashAccessibility"
+								ResourceId="2"
+							>
+								<Interface
+									Id="{307F64C0-621D-4D56-BBC6-91EFC13CE40D}"
+									Name="ISimpleTextSelection"
+									ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+									Versioned="no"
+								/>
+								<Interface
+									Id="{57A0E747-3863-4D20-A811-950C84F1DB9B}"
+									Name="IFlashAccessibility"
+									ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+									Versioned="yes"
+								/>
+							</TypeLib>
+							<TypeLib
+								Id="{D27CDB6B-AE6D-11cf-96B8-444553540000}"
+								Advertise="no"
+								MajorVersion="1" MinorVersion="0"
+								Language="1033"
+								Description="Shockwave Flash"
+								Control="yes"
+							>
+							</TypeLib>
+						</File>
 						<TypeLib
 							Id="{57A0E746-3863-4D20-A811-950C84F1DB9B}"
 							Advertise="yes"
 							MajorVersion="1" MinorVersion="1"
 							Language="1033"
 							Description="FlashAccessibility"
+							Cost="5000"
 						>
-							<Interface
-								Id="{307F64C0-621D-4D56-BBC6-91EFC13CE40D}"
-								Name="ISimpleTextSelection"
-								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
-							/>
-							<Interface
-								Id="{57A0E747-3863-4D20-A811-950C84F1DB9B}"
-								Name="IFlashAccessibility"
-								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
-							/>
 						</TypeLib>
 						<TypeLib
 							Id="{D27CDB6B-AE6D-11cf-96B8-444553540000}"
 							Advertise="yes"
-							MajorVersion="1" MinorVersion="1"
+							MajorVersion="1" MinorVersion="0"
 							Language="1033"
 							Description="Shockwave Flash"
+							Cost="5000"
 						>
 							<Class
 								Id="{D27CDB6E-AE6D-11cf-96B8-444553540000}"
@@ -119,10 +133,20 @@
 								<ProgId Id="ShockwaveFlash.ShockwaveFlash.11" Advertise="yes" Description="Shockwave Flash Object">
 									<ProgId Id="ShockwaveFlash.ShockwaveFlash" Advertise="yes" Description="Shockwave Flash Object">
 										<Extension Id="spl" Advertise="yes">
-											<MIME ContentType="application/futuresplash" Advertise="yes" Default="yes"/>
+											<MIME
+												ContentType="application/futuresplash"
+												Advertise="yes"
+												Default="yes"
+												Class="{D27CDB6E-AE6D-11cf-96B8-444553540000}"
+											/>
 										</Extension>
 										<Extension Id="swf" Advertise="yes">
-											<MIME ContentType="application/x-shockwave-flash" Advertise="yes" Default="yes"/>
+											<MIME
+												ContentType="application/x-shockwave-flash"
+												Advertise="yes"
+												Default="yes"
+												Class="{D27CDB6E-AE6D-11cf-96B8-444553540000}"
+											/>
 										</Extension>
 									</ProgId>
 									<ProgId Id="ShockwaveFlash.ShockwaveFlash.1" Advertise="yes" Description="Shockwave Flash Object"/>
@@ -162,6 +186,46 @@
 								</ProgId>
 							</Class> 
 						</TypeLib>
+						<RegistryKey
+							Root="HKLM"
+							Key="SOFTWARE\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11CF-96B8-444553540000}"
+							ForceDeleteOnUninstall="yes"
+						>
+							<RegistryValue
+								Name="Compatibility Flags"
+								Type="integer"
+								Value="0"
+							/>
+						</RegistryKey>
+						<RegistryKey
+							Root="HKCR"
+							Key="CLSID\{D27CDB6E-AE6D-11cf-96B8-444553540000}"
+						>
+							<RegistryKey
+								Key="EnableFullPage"
+								ForceDeleteOnUninstall="yes"
+							>
+								<RegistryKey Key=".mfp" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+								<RegistryKey Key=".spl" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+								<RegistryKey Key=".swf" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+							</RegistryKey>
+							<RegistryKey
+								Key="Implemented Categories"
+								ForceDeleteOnUninstall="yes"
+							>
+								<RegistryKey Key="{31CAF6E4-D6AA-4090-A050-A5AC8972E9EF}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+								<RegistryKey Key="{59FB2056-D625-48D0-A944-1A85B5AB2640}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+								<RegistryKey Key="{7DD95801-9882-11CF-9FA9-00AA006C42C4}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+								<RegistryKey Key="{7DD95802-9882-11CF-9FA9-00AA006C42C4}" ForceCreateOnInstall="yes" ForceDeleteOnUninstall="yes"	/>
+							</RegistryKey>
+							<RegistryKey
+								Key="MiscStatus"
+								ForceDeleteOnUninstall="yes"
+							>
+								<RegistryValue Type="string" Value="0"/>
+								<RegistryValue Key="1" Type="string" Value="131473"/>
+							</RegistryKey>
+						</RegistryKey>
 						<File Name="activex.vch"/>
 					</Component>
 
@@ -170,28 +234,52 @@
 						Location="local"
 						Win64="$(var.Win64)"
 					>
-						<File Name="FlashUtil$(var.PlatformPostfix)_11_6_602_180_ActiveX.exe" Vital="no" SelfRegCost="1" KeyPath="yes"/>
-						<TypeLib
-							Id="{FAB3E735-69C7-453B-A446-B6823C6DF1C9}"
-							MajorVersion="1" MinorVersion="0"
-							Advertise="yes"
-							Description="FlashBroker"
-							Language="1033"
-						>
-							<Class
-								Id="{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
-								Advertise="yes"
-								Context="LocalServer32"
+						<File Name="FlashUtil.exe" Vital="yes" KeyPath="yes">
+							<TypeLib
+								Id="{FAB3E735-69C7-453B-A446-B6823C6DF1C9}"
+								MajorVersion="1" MinorVersion="0"
+								Advertise="no"
 								Description="FlashBroker"
+								Language="1033"
+							>
+								<Class
+									Id="{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
+									Advertise="no"
+									Context="LocalServer32"
+									Description="FlashBroker"
+								>
+									<Interface
+										Id="{6AE38AE0-750C-11E1-B0C4-0800200C9A66}"
+										Name="IFlashBroker5"
+										ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+										Versioned="yes"
+									/>
+								</Class>
+							</TypeLib>
+						</File>
+						<RegistryKey
+							Root="HKCR"
+							Key="CLSID\{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
+						>
+							<RegistryValue
+								Name="LocalizedString"
+								Type="string"
+								Value="@[#FlashUtil.exe],-101"
 							/>
-						</TypeLib>
+							<RegistryKey
+								Key="Elevation"
+								ForceDeleteOnUninstall="yes"
+							>
+								<RegistryValue Name="Enabled" Type="integer" Value="1"/>
+							</RegistryKey>
+						</RegistryKey>
 					</Component>
 					<Component
 						Id="FlashUtil_ActiveX.dll"
 						Location="local"
 						Win64="$(var.Win64)"
 					>
-						<File Name="FlashUtil$(var.PlatformPostfix)_11_6_602_180_ActiveX.dll" Vital="no"/>
+						<File Name="FlashUtil.dll" Vital="yes" KeyPath="yes"/>
 					</Component>
 
 				</Directory>

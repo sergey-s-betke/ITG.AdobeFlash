@@ -16,10 +16,10 @@
     <SuppressValidation>False</SuppressValidation>
     <SuppressPdbOutput>False</SuppressPdbOutput>
   </PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<SuppressPdbOutput>True</SuppressPdbOutput>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
   </PropertyGroup>
@@ -33,14 +33,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Windows\System32\activex.vch" />
-    <Content Include="Windows\System32\Flash32_11_6_602_180.ocx" />
+    <Content Include="Windows\System32\Flash.ocx" />
     <Content Include="Windows\System32\FlashPlayerUpdateService.exe" />
-    <Content Include="Windows\System32\FlashUtil32_11_6_602_180_ActiveX.dll" />
-    <Content Include="Windows\System32\FlashUtil32_11_6_602_180_ActiveX.exe" />
+    <Content Include="Windows\System32\FlashUtil.dll" />
+    <Content Include="Windows\System32\FlashUtil.exe" />
     <Content Include="Windows\System64\activex.vch" />
-    <Content Include="Windows\System64\Flash64_11_6_602_180.ocx" />
-    <Content Include="Windows\System64\FlashUtil64_11_6_602_180_ActiveX.dll" />
-    <Content Include="Windows\System64\FlashUtil64_11_6_602_180_ActiveX.exe" />
+    <Content Include="Windows\System64\Flash.ocx" />
+    <Content Include="Windows\System64\FlashUtil.dll" />
+    <Content Include="Windows\System64\FlashUtil.exe" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
