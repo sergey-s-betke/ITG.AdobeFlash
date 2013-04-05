@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	
+	<?define ProductVersion="11.06.0602.0180"?>
+	<?define ProductName="Adobe Flash Player v$(var.ProductVersion)"?>
+	<?define ProductCode="9223BBDE-693D-4B5F-A1DE-C40C7D2E4C89"?>
+	<?define UpgradeCode="42463807-970B-4257-BC95-5C348D61DF1C"?>
+	<?define Manufacturer="Adobe Systems Incorporated"?>
+
+	<?if $(sys.BUILDARCH) = "x86" ?>
+		<?define PlatformPostfix="32" ?>
+		<?define SystemFolderId="SystemFolder" ?>
+		<?define SystemFolder="System32" ?>
+		<?define Win64="no" ?>
+	<?elseif $(sys.PLATFORM) = "x64" ?> 
+		<?define PlatformPostfix="64" ?>
+		<?define SystemFolderId="System64Folder" ?>
+		<?define SystemFolder="System64" ?>
+		<?define Win64="yes" ?>
+	<?else?> 
+		<?error "Platform must be x86 or x64" ?>
+	<?endif?>
+
+	<Product
+		Id="$(var.ProductCode)"
+		Name="$(var.ProductName)"
+		Version="$(var.ProductVersion)"
+		Language="1033"
+		Codepage="1252"
+		Manufacturer="$(var.Manufacturer)"
+		UpgradeCode="$(var.UpgradeCode)"
+	>
+		<Package
+			InstallerVersion="200"
+			InstallScope="perMachine"
+			InstallPrivileges="elevated"
+			AdminImage="yes"
+			Compressed="no"
+			Description="Package for distibution flash player activeX"
+			Manufacturer="IT-Service"
+			SummaryCodepage="1252" 
+		/>
+
+		<MajorUpgrade
+			DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+			AllowSameVersionUpgrades="yes"
+		/>
+		<MediaTemplate />
+
+		<Feature
+			Id="Flash.ocx"
+			Title="Flash player ActiveX"
+			Level="1"
+			AllowAdvertise="system"
+			InstallDefault="local"
+			TypicalDefault="advertise"
+		>
+			<ComponentRef Id="Flash.ocx" />
+		</Feature>
+		<Feature
+			Id="FlashUtil"
+			Title="Flash player properties page"
+			Level="200"
+			AllowAdvertise="system"
+			InstallDefault="local"
+			TypicalDefault="advertise"
+		>
+			<ComponentRef Id="FlashUtil_ActiveX.exe" />
+			<ComponentRef Id="FlashUtil_ActiveX.dll" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir" FileSource=".">
+			<Directory Id="WindowsFolder" Name="Windows">
+				<Directory Id="$(var.SystemFolderId)" Name="System32" FileSource="Windows\$(var.SystemFolder)" >
+
+					<Component
+						Id="Flash.ocx"
+						Location="local"
+						Win64="$(var.Win64)"
+					>
+						<File Name="Flash$(var.PlatformPostfix)_11_6_602_180.ocx" Vital="yes" SelfRegCost="1" KeyPath="yes"/>
+						<TypeLib
+							Id="{57A0E746-3863-4D20-A811-950C84F1DB9B}"
+							Advertise="yes"
+							MajorVersion="1" MinorVersion="1"
+							Language="1033"
+							Description="FlashAccessibility"
+						>
+							<Interface
+								Id="{307F64C0-621D-4D56-BBC6-91EFC13CE40D}"
+								Name="ISimpleTextSelection"
+								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+							/>
+							<Interface
+								Id="{57A0E747-3863-4D20-A811-950C84F1DB9B}"
+								Name="IFlashAccessibility"
+								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+							/>
+						</TypeLib>
+						<TypeLib
+							Id="{D27CDB6B-AE6D-11cf-96B8-444553540000}"
+							Advertise="yes"
+							MajorVersion="1" MinorVersion="1"
+							Language="1033"
+							Description="Shockwave Flash"
+						>
+							<Class
+								Id="{D27CDB6E-AE6D-11cf-96B8-444553540000}"
+								Description="Shockwave Flash Object"
+								Advertise="yes"
+								Context="InprocServer32"
+								ThreadingModel="apartment"
+								Version="1.0"
+								Control="yes" 
+								Programmable="yes"
+							>
+								<ProgId Id="ShockwaveFlash.ShockwaveFlash.11" Advertise="yes" Description="Shockwave Flash Object">
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash" Advertise="yes" Description="Shockwave Flash Object">
+										<Extension Id="spl" Advertise="yes">
+											<MIME ContentType="application/futuresplash" Advertise="yes" Default="yes"/>
+										</Extension>
+										<Extension Id="swf" Advertise="yes">
+											<MIME ContentType="application/x-shockwave-flash" Advertise="yes" Default="yes"/>
+										</Extension>
+									</ProgId>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.1" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.2" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.3" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.4" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.5" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.6" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.7" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.8" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.9" Advertise="yes" Description="Shockwave Flash Object"/>
+									<ProgId Id="ShockwaveFlash.ShockwaveFlash.10" Advertise="yes" Description="Shockwave Flash Object"/>
+								</ProgId>
+									
+								<ProgId Id="MacromediaFlashPaper.MacromediaFlashPaper" Advertise="yes">
+									<Extension Id="mfp" Advertise="yes" ContentType="application/x-shockwave-flash">
+										<Verb Id="open" Argument="C:\Program Files\Internet Explorer\iexplore.exe %1"/>
+									</Extension>
+								</ProgId>
+							</Class> 
+							<Class
+								Id="{D27CDB70-AE6D-11cf-96B8-444553540000}"
+								Description="Macromedia Flash Factory Object"
+								Advertise="yes"
+								Context="InprocServer32"
+								ThreadingModel="apartment"
+								Version="1.0"
+								Control="yes"
+								Programmable="yes"
+							>
+								<ProgId
+									Id="FlashFactory.FlashFactory.1"
+									Advertise="yes"
+									Description="Macromedia Flash Factory Object"
+								>
+									<ProgId Id="FlashFactory.FlashFactory" Advertise="yes" Description="Macromedia Flash Factory Object"/>
+								</ProgId>
+							</Class> 
+						</TypeLib>
+						<File Name="activex.vch"/>
+					</Component>
+
+					<Component
+						Id="FlashUtil_ActiveX.exe"
+						Location="local"
+						Win64="$(var.Win64)"
+					>
+						<File Name="FlashUtil$(var.PlatformPostfix)_11_6_602_180_ActiveX.exe" Vital="no" SelfRegCost="1" KeyPath="yes"/>
+						<TypeLib
+							Id="{FAB3E735-69C7-453B-A446-B6823C6DF1C9}"
+							MajorVersion="1" MinorVersion="0"
+							Advertise="yes"
+							Description="FlashBroker"
+							Language="1033"
+						>
+							<Class
+								Id="{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
+								Advertise="yes"
+								Context="LocalServer32"
+								Description="FlashBroker"
+							/>
+						</TypeLib>
+					</Component>
+					<Component
+						Id="FlashUtil_ActiveX.dll"
+						Location="local"
+						Win64="$(var.Win64)"
+					>
+						<File Name="FlashUtil$(var.PlatformPostfix)_11_6_602_180_ActiveX.dll" Vital="no"/>
+					</Component>
+
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+</Wix>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.7</ProductVersion>
+    <ProjectGuid>dd87f827-eb44-46b7-ba89-e0a401828e2e</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>itgAdobeFlash</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <SuppressIces>ICE09;ICE39;ICE61</SuppressIces>
+    <OutputPath>bin\$(Configuration)\$(Platform)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(Platform)\</IntermediateOutputPath>
+    <SuppressValidation>False</SuppressValidation>
+    <SuppressPdbOutput>False</SuppressPdbOutput>
+  </PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<SuppressPdbOutput>True</SuppressPdbOutput>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows" />
+    <Folder Include="Windows\System32" />
+    <Folder Include="Windows\System64" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Windows\System32\activex.vch" />
+    <Content Include="Windows\System32\Flash32_11_6_602_180.ocx" />
+    <Content Include="Windows\System32\FlashPlayerUpdateService.exe" />
+    <Content Include="Windows\System32\FlashUtil32_11_6_602_180_ActiveX.dll" />
+    <Content Include="Windows\System32\FlashUtil32_11_6_602_180_ActiveX.exe" />
+    <Content Include="Windows\System64\activex.vch" />
+    <Content Include="Windows\System64\Flash64_11_6_602_180.ocx" />
+    <Content Include="Windows\System64\FlashUtil64_11_6_602_180_ActiveX.dll" />
+    <Content Include="Windows\System64\FlashUtil64_11_6_602_180_ActiveX.exe" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>
