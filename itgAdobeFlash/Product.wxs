@@ -76,28 +76,16 @@
 								Id="{57A0E746-3863-4D20-A811-950C84F1DB9B}"
 								Advertise="no"
 								MajorVersion="1" MinorVersion="1"
-								Language="1033"
+								Language="0"
 								Description="FlashAccessibility"
 								ResourceId="2"
 							>
-								<Interface
-									Id="{307F64C0-621D-4D56-BBC6-91EFC13CE40D}"
-									Name="ISimpleTextSelection"
-									ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
-									Versioned="no"
-								/>
-								<Interface
-									Id="{57A0E747-3863-4D20-A811-950C84F1DB9B}"
-									Name="IFlashAccessibility"
-									ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
-									Versioned="yes"
-								/>
 							</TypeLib>
 							<TypeLib
 								Id="{D27CDB6B-AE6D-11cf-96B8-444553540000}"
 								Advertise="no"
 								MajorVersion="1" MinorVersion="0"
-								Language="1033"
+								Language="0"
 								Description="Shockwave Flash"
 								Control="yes"
 							>
@@ -107,16 +95,28 @@
 							Id="{57A0E746-3863-4D20-A811-950C84F1DB9B}"
 							Advertise="yes"
 							MajorVersion="1" MinorVersion="1"
-							Language="1033"
+							Language="0"
 							Description="FlashAccessibility"
 							Cost="5000"
 						>
+							<Interface
+								Id="{307F64C0-621D-4D56-BBC6-91EFC13CE40D}"
+								Name="ISimpleTextSelection"
+								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+								Versioned="no"
+							/>
+							<Interface
+								Id="{57A0E747-3863-4D20-A811-950C84F1DB9B}"
+								Name="IFlashAccessibility"
+								ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+								Versioned="yes"
+							/>
 						</TypeLib>
 						<TypeLib
 							Id="{D27CDB6B-AE6D-11cf-96B8-444553540000}"
 							Advertise="yes"
 							MajorVersion="1" MinorVersion="0"
-							Language="1033"
+							Language="0"
 							Description="Shockwave Flash"
 							Cost="5000"
 						>
@@ -234,29 +234,29 @@
 						Location="local"
 						Win64="$(var.Win64)"
 					>
-						<File Name="FlashUtil.exe" Vital="yes" KeyPath="yes">
-							<TypeLib
-								Id="{FAB3E735-69C7-453B-A446-B6823C6DF1C9}"
-								MajorVersion="1" MinorVersion="0"
-								Advertise="no"
+						<File Name="FlashUtil.exe" Vital="yes" KeyPath="yes"/>
+						<TypeLib
+							Id="{FAB3E735-69C7-453B-A446-B6823C6DF1C9}"
+							MajorVersion="1" MinorVersion="0"
+							Advertise="yes"
+							Description="FlashBroker"
+							Language="0"
+							Cost="5000"
+						>
+							<Class
+								Id="{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
+								Advertise="yes"
+								Context="LocalServer32"
 								Description="FlashBroker"
-								Language="1033"
-							>
-								<Class
-									Id="{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
-									Advertise="no"
-									Context="LocalServer32"
-									Description="FlashBroker"
 								>
-									<Interface
-										Id="{6AE38AE0-750C-11E1-B0C4-0800200C9A66}"
-										Name="IFlashBroker5"
-										ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
-										Versioned="yes"
-									/>
-								</Class>
-							</TypeLib>
-						</File>
+								<Interface
+									Id="{6AE38AE0-750C-11E1-B0C4-0800200C9A66}"
+									Name="IFlashBroker5"
+									ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}"
+									Versioned="yes"
+								/>
+							</Class>
+						</TypeLib>
 						<RegistryKey
 							Root="HKCR"
 							Key="CLSID\{73C9DFA0-750D-11E1-B0C4-0800200C9A66}"
